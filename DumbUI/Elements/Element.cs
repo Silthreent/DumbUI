@@ -1,0 +1,48 @@
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
+
+namespace DumbUI.Elements
+{
+    public abstract class Element
+    {
+        float topAnchor;
+        float leftAnchor;
+
+        public Element(float topA, float leftA)
+        {
+            TopAnchor = topA;
+            LeftAnchor = leftA;
+        }
+
+        internal abstract void Draw(SpriteBatch spriteBatch);
+
+        public float TopAnchor
+        {
+            get
+            {
+                return topAnchor;
+            }
+            set
+            {
+                topAnchor = LockValue(value);
+            }
+        }
+
+        public float LeftAnchor
+        {
+            get
+            {
+                return leftAnchor;
+            }
+            set
+            {
+                leftAnchor = LockValue(value);
+            }
+        }
+
+        float LockValue(float value)
+        {
+            return Math.Min(Math.Max(value, 0), 1);
+        }
+    }
+}
