@@ -14,9 +14,9 @@ namespace DumbUI.Elements
             this.text = text;
         }
 
-        internal override void Draw(SpriteBatch spriteBatch)
+        internal override void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            spriteBatch.DrawString(font, text, new Vector2(50, 50), Color.White);
+            spriteBatch.DrawString(font, text, position, Color.White);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace DumbUI.Elements
@@ -14,7 +15,7 @@ namespace DumbUI.Elements
             LeftAnchor = leftA;
         }
 
-        internal abstract void Draw(SpriteBatch spriteBatch);
+        internal abstract void Draw(SpriteBatch spriteBatch, Vector2 position);
 
         public float TopAnchor
         {
