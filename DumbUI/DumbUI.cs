@@ -42,6 +42,9 @@ namespace DumbUI
 
         public static void AddElement(int player, Element element)
         {
+            if(player >= players.Length)
+                return;
+
             if(players[player] == null)
             {
                 players[player] = new PlayerUI();

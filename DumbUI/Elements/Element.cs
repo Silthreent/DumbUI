@@ -9,13 +9,9 @@ namespace DumbUI.Elements
         float topAnchor;
         float leftAnchor;
 
-        public Element(float topA, float leftA)
-        {
-            TopAnchor = topA;
-            LeftAnchor = leftA;
-        }
-
         internal abstract void Draw(SpriteBatch spriteBatch, Vector2 position);
+
+        internal abstract Vector2 GetSize();
 
         public float TopAnchor
         {

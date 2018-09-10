@@ -8,7 +8,7 @@ namespace DumbUI.Elements
         SpriteFont font;
         string text;
 
-        public Label(SpriteFont font, string text = "", float topA = 0, float leftA = 0) : base(topA, leftA)
+        public Label(SpriteFont font, string text = "")
         {
             this.font = font;
             this.text = text;
@@ -16,7 +16,12 @@ namespace DumbUI.Elements
 
         internal override void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            spriteBatch.DrawString(font, text, position, Color.White);
+            spriteBatch.DrawString(font, text, position - (GetSize() / 2), Color.White);
+        }
+
+        internal override Vector2 GetSize()
+        {
+            return font.MeasureString(text);
         }
     }
 }
