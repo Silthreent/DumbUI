@@ -46,6 +46,7 @@
     <Compile Include="DumbUI.cs" />
     <Compile Include="Elements\Element.cs" />
     <Compile Include="Elements\Label.cs" />
+    <Compile Include="Elements\HPanel.cs" />
     <Compile Include="PlayerUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
