@@ -1,4 +1,5 @@
 ﻿using DumbUI.Elements;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
@@ -6,23 +7,26 @@ namespace DumbUI
 {
     public static class DumbUIManager
     {
+        static Vector2 screenSize;
+        
         static PlayerUI[] players = new PlayerUI[2];
 
         public static void Draw(SpriteBatch spriteBatch, bool beginBatch = true)
         {
+            var screen = new Vector2(spriteBatch.GraphicsDevice.Viewport.Width, spriteBatch.GraphicsDevice.Viewport.Height);
+
+            if(screenSize != screen)
+            {
+                Console.WriteLine("UPDATING");
+                screenSize = screen;
+
+                // TODO: Update UI positions
+            }
+
             if(beginBatch)
                 spriteBatch.Begin();
 
             {
-                /*int pcount = 0;
-                foreach(PlayerUI x in players)
-                {
-                    if(x != null)
-                    {
-                        pcount++;
-                    }
-                }*/
-
                 bool vOffset = false;
                 bool split = players[0] != null && players[1] != null;
 

@@ -6,12 +6,19 @@ namespace DumbUI.Elements
 {
     public abstract class Element
     {
+        Vector2 position;
+
         float topAnchor;
         float leftAnchor;
 
         internal abstract void Draw(SpriteBatch spriteBatch, Vector2 position);
 
         internal abstract Vector2 GetSize();
+
+        public void UpdatePosition(Vector2 screenRegion)
+        {
+            position = new Vector2(screenRegion.X * leftAnchor, screenRegion.Y * topAnchor);
+        }
 
         public float TopAnchor
         {

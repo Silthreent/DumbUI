@@ -5,26 +5,22 @@ using System.Collections.Generic;
 
 namespace DumbUI.Elements
 {
-    public class HPanel : Element
+    public class HPanel : Panel
     {
-        List<Element> elements;
-
-        float totalWidth;
-        int margin;
-
         public HPanel(int margin = 10)
         {
-            elements = new List<Element>();
-
             this.margin = margin;
+
+            elements = new List<Element>();
+            size = new Vector2();
         }
 
         internal override void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            float space = 0;
-            // Must be 33% because Labels will also move themself
-            position.X -= totalWidth * .33f;
+            // Must be 33% because Labels will also center themself
+            position.X -= size.X * .33f;
 
+            float space = 0;
             foreach(Element e in elements)
             {
                 e.Draw(spriteBatch, position + new Vector2(space, 0));
@@ -35,12 +31,12 @@ namespace DumbUI.Elements
         public void AddElement(Element elem)
         {
             elements.Add(elem);
-            totalWidth += elem.GetSize().X + margin;
-        }
 
-        internal override Vector2 GetSize()
-        {
-            return new Vector2();
+            var eSize = elem.GetSize();
+
+            size.X += eSize.X + margin;
+            if(eSize.Y > size.Y)
+                size.Y = eSize.Y;
         }
     }
 }
