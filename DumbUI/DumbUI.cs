@@ -7,9 +7,9 @@ namespace DumbUI
 {
     public static class DumbUIManager
     {
-        static Vector2 screenSize;
-        
         static PlayerUI[] players = new PlayerUI[2];
+
+        static Vector2 screenSize;
 
         public static void Draw(SpriteBatch spriteBatch, bool beginBatch = true)
         {
@@ -20,22 +20,18 @@ namespace DumbUI
                 Console.WriteLine("UPDATING");
                 screenSize = screen;
 
-                // TODO: Update UI positions
+                UpdatePositions();
             }
 
             if(beginBatch)
                 spriteBatch.Begin();
 
             {
-                bool vOffset = false;
-                bool split = players[0] != null && players[1] != null;
-
                 for(int x = 0; x <= players.Length - 1; x++)
                 {
                     if(players[x] != null)
                     {
-                        players[x].Draw(spriteBatch, vOffset, split);
-                        vOffset = !vOffset;
+                        players[x].Draw(spriteBatch);
                     }
                 }
             }
@@ -44,17 +40,38 @@ namespace DumbUI
                 spriteBatch.End();
         }
 
-        public static void AddElement(int player, Element element)
+        public static void AddPanel(int player, Panel panel)
         {
             if(player >= players.Length)
                 return;
 
+            bool created = false;
             if(players[player] == null)
             {
+                Console.WriteLine("ADDED PLAYER " + player);
                 players[player] = new PlayerUI();
+                created = true;
             }
 
-            players[player].Elements.Add(element);
+            players[player].Elements.Add(panel);
+
+            if(created)
+                UpdatePositions();
+        }
+
+        static void UpdatePositions()
+        {
+            bool vOffset = false;
+            bool split = players[0] != null && players[1] != null;
+
+            for(int x = 0; x <= players.Length - 1; x++)
+            {
+                if(players[x] != null)
+                {
+                    players[x].UpdatePositions(screenSize, vOffset, split);
+                    vOffset = !vOffset;
+                }
+            }
         }
     }
 }

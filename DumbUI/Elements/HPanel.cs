@@ -1,42 +1,41 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
 
 namespace DumbUI.Elements
 {
     public class HPanel : Panel
     {
-        public HPanel(int margin = 10)
+        public HPanel(Texture2D debug, int margin = 10)
         {
-            this.margin = margin;
-
-            elements = new List<Element>();
-            size = new Vector2();
+            debugTex = debug;
+            elementsMargin = margin;
         }
 
-        internal override void Draw(SpriteBatch spriteBatch, Vector2 position)
+        public override void AddElement(Element elem)
         {
-            // Must be 33% because Labels will also center themself
-            position.X -= size.X * .33f;
+            elem.Position = new Vector2(Position.X + Size.X + elementsMargin, Position.Y);
+            elements.Add(elem);
+
+            var eSize = elem.GetSize();
+            if(elements.Count == 1)
+            {
+                Size = eSize;
+                return;
+            }
+
+            Size = new Vector2(Size.X + elementsMargin + eSize.X, (eSize.Y > Size.Y ? eSize.Y : Size.Y));
+        }
+
+        internal override void UpdatePositions(Vector2 screenSize, bool offset)
+        {
+            Position = new Vector2((screenSize.X * LeftAnchor) - (Size.X * .5f), screenSize.Y * TopAnchor + (offset ? screenSize.Y : 0));
 
             float space = 0;
             foreach(Element e in elements)
             {
-                e.Draw(spriteBatch, position + new Vector2(space, 0));
-                space += e.GetSize().X + margin;
+                e.Position = new Vector2(Position.X + space, Position.Y - (e.GetSize().Y / 2));
+                space += e.GetSize().X + elementsMargin;
             }
-        }
-
-        public void AddElement(Element elem)
-        {
-            elements.Add(elem);
-
-            var eSize = elem.GetSize();
-
-            size.X += eSize.X + margin;
-            if(eSize.Y > size.Y)
-                size.Y = eSize.Y;
         }
     }
 }

@@ -1,37 +1,40 @@
 ﻿using DumbUI.Elements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 
 namespace DumbUI
 {
     class PlayerUI
     {
-        public List<Element> Elements { get; private set; }
+        public List<Panel> Elements { get; private set; }
 
         public PlayerUI()
         {
-            Elements = new List<Element>();
+            Elements = new List<Panel>();
         }
 
-        public void Draw(SpriteBatch spriteBatch, bool vOffset = false, bool hSplit = false)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            var scrWidth = spriteBatch.GraphicsDevice.Viewport.Width;
-            var scrHeight = spriteBatch.GraphicsDevice.Viewport.Height;
+            foreach(Panel x in Elements)
+            {
+                x.Draw(spriteBatch);
+            }
+        }
 
-            var width = scrWidth;
-            var height = scrHeight;
-
+        public void UpdatePositions(Vector2 screenSize, bool vOffset, bool hSplit)
+        {
             if(hSplit)
             {
-                height /= 2;
+                screenSize.Y /= 2;
             }
 
-            foreach(Element x in Elements)
+            Console.WriteLine(vOffset + ": " + screenSize);
+
+            foreach(Panel x in Elements)
             {
-                x.Draw(spriteBatch, new Vector2(
-                    width * x.LeftAnchor,
-                    height * x.TopAnchor + (vOffset ? scrHeight / 2 : 0)));
+                x.UpdatePositions(screenSize, vOffset);
             }
         }
     }
