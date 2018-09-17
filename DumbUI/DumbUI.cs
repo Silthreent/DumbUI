@@ -1,5 +1,6 @@
 ﻿using DumbUI.Elements;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
@@ -10,6 +11,12 @@ namespace DumbUI
         static PlayerUI[] players = new PlayerUI[2];
 
         static Vector2 screenSize;
+        static Texture2D cursorTex;
+
+        public static void LoadDesign(ContentManager content)
+        {
+            cursorTex = content.Load<Texture2D>("Debug");
+        }
 
         public static void Draw(SpriteBatch spriteBatch, bool beginBatch = true)
         {
@@ -40,7 +47,7 @@ namespace DumbUI
                 spriteBatch.End();
         }
 
-        public static void AddPanel(int player, Panel panel)
+        public static void AddPanel(int player, Panel panel, bool select = false)
         {
             if(player >= players.Length)
                 return;
@@ -49,7 +56,7 @@ namespace DumbUI
             if(players[player] == null)
             {
                 Console.WriteLine("ADDED PLAYER " + player);
-                players[player] = new PlayerUI();
+                players[player] = new PlayerUI(cursorTex);
                 created = true;
             }
 
@@ -57,6 +64,9 @@ namespace DumbUI
 
             if(created)
                 UpdatePositions();
+
+            if(select)
+                players[player].SelectPanel(panel);
         }
 
         static void UpdatePositions()

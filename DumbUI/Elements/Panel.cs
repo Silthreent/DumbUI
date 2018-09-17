@@ -30,6 +30,11 @@ namespace DumbUI.Elements
             }
         }
 
+        internal Element GetElement(int element)
+        {
+            return elements[element];
+        }
+
         public float TopAnchor
         {
             get
