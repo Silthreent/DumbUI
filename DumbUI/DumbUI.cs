@@ -8,6 +8,7 @@ namespace DumbUI
 {
     public static class DumbUIManager
     {
+        static InputEvents input = new InputEvents();
         static PlayerUI[] players = new PlayerUI[2];
 
         static Vector2 screenSize;
@@ -16,6 +17,11 @@ namespace DumbUI
         public static void LoadDesign(ContentManager content)
         {
             cursorTex = content.Load<Texture2D>("Debug");
+        }
+
+        public static void Update(GameTime delta)
+        {
+            input.Update();
         }
 
         public static void Draw(SpriteBatch spriteBatch, bool beginBatch = true)
@@ -82,6 +88,11 @@ namespace DumbUI
                     vOffset = !vOffset;
                 }
             }
+        }
+
+        internal static void OnInputEvent(int player, InputActions action)
+        {
+            Console.WriteLine("Player: " + player + " used " + action);
         }
     }
 }
