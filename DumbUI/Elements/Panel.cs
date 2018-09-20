@@ -16,6 +16,8 @@ namespace DumbUI.Elements
 
         float topAnchor;
         float leftAnchor;
+        Panel leftSide;
+        Panel rightSide;
 
         public abstract void AddElement(Element elem);
         internal abstract void UpdatePositions(Vector2 screenSize, bool offset);
@@ -43,6 +45,38 @@ namespace DumbUI.Elements
         internal int GetElementCount()
         {
             return elements.Count;
+        }
+
+        public void SetLeft(Panel panel)
+        {
+            leftSide = panel;
+            panel.SetRightNoBack(this);
+        }
+
+        public void SetRight(Panel panel)
+        {
+            rightSide = panel;
+            panel.SetLeftNoBack(this);
+        }
+
+        void SetLeftNoBack(Panel panel)
+        {
+            leftSide = panel;
+        }
+
+        void SetRightNoBack(Panel panel)
+        {
+            rightSide = panel;
+        }
+
+        internal Panel GetLeft()
+        {
+            return leftSide;
+        }
+
+        internal Panel GetRight()
+        {
+            return rightSide;
         }
 
         public float TopAnchor

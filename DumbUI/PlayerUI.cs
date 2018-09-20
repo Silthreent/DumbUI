@@ -76,16 +76,46 @@ namespace DumbUI
                     selectedNumber--;
                     if(selectedNumber < 0)
                     {
-                        selectedNumber = selectedPanel.GetElementCount() - 1;
+                        CheckSides(true);
                     }
                     break;
                 case InputActions.Right:
                     selectedNumber++;
                     if(selectedNumber >= selectedPanel.GetElementCount())
                     {
-                        selectedNumber = 0;
+                        CheckSides(false);
                     }
                     break;
+            }
+        }
+
+        void CheckSides(bool left)
+        {
+            if(left)
+            {
+                if(selectedPanel.GetLeft() != null)
+                {
+                    var panel = selectedPanel.GetLeft();
+                    selectedPanel = panel;
+                    selectedNumber = panel.GetElementCount() - 1;
+                }
+                else
+                {
+                    selectedNumber = selectedPanel.GetElementCount() - 1;
+                }
+            }
+            else
+            {
+                if(selectedPanel.GetRight() != null)
+                {
+                    var panel = selectedPanel.GetRight();
+                    selectedPanel = panel;
+                    selectedNumber = 0;
+                }
+                else
+                {
+                    selectedNumber = 0;
+                }
             }
         }
     }
