@@ -1,13 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace DumbUI.Elements
 {
     public class HPanel : Panel
     {
-        public HPanel(Texture2D debug, int margin = 10)
+        public HPanel(int margin = 10)
         {
-            debugTex = debug;
             elementsMargin = margin;
         }
 

@@ -66,12 +66,6 @@ namespace DumbUI
         {
             switch(action)
             {
-                case InputActions.Accept:
-                    selectedPanel.HandleInput(action);
-                    break;
-                case InputActions.Back:
-                    selectedPanel.HandleInput(action);
-                    break;
                 case InputActions.Left:
                     selectedNumber--;
                     if(selectedNumber < 0)
@@ -85,6 +79,10 @@ namespace DumbUI
                     {
                         CheckSides(false);
                     }
+                    break;
+
+                default:
+                    selectedPanel.CheckInput(action, selectedNumber);
                     break;
             }
         }
