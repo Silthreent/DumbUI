@@ -12,7 +12,6 @@ namespace DumbUI
 
         Panel selectedPanel;
         int selectedNumber;
-        Element selectedElement;
 
         Texture2D cursorTex;
 
@@ -27,7 +26,7 @@ namespace DumbUI
         {
             selectedPanel = panel;
             selectedNumber = 0;
-            selectedElement = selectedPanel.GetElement(0);
+            //selectedElement = selectedPanel.GetElement(0);
         }
 
         internal void Draw(SpriteBatch spriteBatch)
@@ -39,9 +38,10 @@ namespace DumbUI
 
             if(selectedPanel != null)
             {
+                var ele = selectedPanel.GetElement(selectedNumber);
                 spriteBatch.Draw(cursorTex, new Rectangle(
-                    (int)(selectedElement.Position.X + (selectedElement.GetSize().X / 2) - 8),
-                    (int)(selectedElement.Position.Y + selectedElement.GetSize().Y),
+                    (int)(ele.Position.X + (ele.GetSize().X / 2) - 8),
+                    (int)(ele.Position.Y + ele.GetSize().Y),
                     16, 16),
                     Color.White);
             }
@@ -59,6 +59,33 @@ namespace DumbUI
             foreach(Panel x in Elements)
             {
                 x.UpdatePositions(screenSize, vOffset);
+            }
+        }
+
+        internal void OnInputReceived(InputActions action)
+        {
+            switch(action)
+            {
+                case InputActions.Accept:
+                    selectedPanel.HandleInput(action);
+                    break;
+                case InputActions.Back:
+                    selectedPanel.HandleInput(action);
+                    break;
+                case InputActions.Left:
+                    selectedNumber--;
+                    if(selectedNumber < 0)
+                    {
+                        selectedNumber = selectedPanel.GetElementCount() - 1;
+                    }
+                    break;
+                case InputActions.Right:
+                    selectedNumber++;
+                    if(selectedNumber >= selectedPanel.GetElementCount())
+                    {
+                        selectedNumber = 0;
+                    }
+                    break;
             }
         }
     }

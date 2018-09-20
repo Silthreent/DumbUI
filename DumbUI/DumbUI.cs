@@ -93,6 +93,7 @@ namespace DumbUI
         internal static void OnInputEvent(int player, InputActions action)
         {
             Console.WriteLine("Player: " + player + " used " + action);
+            players[player].OnInputReceived(action);
         }
     }
 }

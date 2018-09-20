@@ -30,9 +30,19 @@ namespace DumbUI.Elements
             }
         }
 
+        internal void HandleInput(InputActions action)
+        {
+
+        }
+
         internal Element GetElement(int element)
         {
             return elements[element];
+        }
+
+        internal int GetElementCount()
+        {
+            return elements.Count;
         }
 
         public float TopAnchor
