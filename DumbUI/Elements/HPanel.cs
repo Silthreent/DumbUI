@@ -24,6 +24,43 @@ namespace DumbUI.Elements
             Size = new Vector2(Size.X + elementsMargin + eSize.X, (eSize.Y > Size.Y ? eSize.Y : Size.Y));
         }
 
+        internal override void MoveCursor(InputActions action, ref int selected, ref Panel selectedPanel)
+        {
+            switch(action)
+            {
+                case (InputActions.Left):
+                    selected--;
+                    if(selected < 0)
+                    {
+                        if(GetLeft() != null)
+                        {
+                            selectedPanel = GetLeft();
+                            selected = selectedPanel.GetElementCount() - 1;
+                        }
+                        else
+                        {
+                            selected = selectedPanel.GetElementCount() - 1;
+                        }
+                    }
+                    break;
+                case (InputActions.Right):
+                    selected++;
+                    if(selected >= GetElementCount())
+                    {
+                        if(GetRight() != null)
+                        {
+                            selectedPanel = GetRight();
+                            selected = 0;
+                        }
+                        else
+                        {
+                            selected = 0;
+                        }
+                    }
+                    break;
+            }
+        }
+
         internal override void UpdatePositions(Vector2 screenSize, bool offset)
         {
             Position = new Vector2((screenSize.X * LeftAnchor) - (Size.X * .5f), screenSize.Y * TopAnchor + (offset ? screenSize.Y : 0));

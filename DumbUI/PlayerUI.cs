@@ -67,53 +67,15 @@ namespace DumbUI
             switch(action)
             {
                 case InputActions.Left:
-                    selectedNumber--;
-                    if(selectedNumber < 0)
-                    {
-                        CheckSides(true);
-                    }
+                    selectedPanel.MoveCursor(action, ref selectedNumber, ref selectedPanel);
                     break;
                 case InputActions.Right:
-                    selectedNumber++;
-                    if(selectedNumber >= selectedPanel.GetElementCount())
-                    {
-                        CheckSides(false);
-                    }
+                    selectedPanel.MoveCursor(action, ref selectedNumber, ref selectedPanel);
                     break;
 
                 default:
                     selectedPanel.CheckInput(action, selectedNumber);
                     break;
-            }
-        }
-
-        void CheckSides(bool left)
-        {
-            if(left)
-            {
-                if(selectedPanel.GetLeft() != null)
-                {
-                    var panel = selectedPanel.GetLeft();
-                    selectedPanel = panel;
-                    selectedNumber = panel.GetElementCount() - 1;
-                }
-                else
-                {
-                    selectedNumber = selectedPanel.GetElementCount() - 1;
-                }
-            }
-            else
-            {
-                if(selectedPanel.GetRight() != null)
-                {
-                    var panel = selectedPanel.GetRight();
-                    selectedPanel = panel;
-                    selectedNumber = 0;
-                }
-                else
-                {
-                    selectedNumber = 0;
-                }
             }
         }
     }
