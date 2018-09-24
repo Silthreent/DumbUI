@@ -72,6 +72,12 @@ namespace DumbUI
                 case InputActions.Right:
                     selectedPanel.MoveCursor(action, ref selectedNumber, ref selectedPanel);
                     break;
+                case InputActions.Up:
+                    selectedPanel.MoveCursor(action, ref selectedNumber, ref selectedPanel);
+                    break;
+                case InputActions.Down:
+                    selectedPanel.MoveCursor(action, ref selectedNumber, ref selectedPanel);
+                    break;
 
                 default:
                     selectedPanel.CheckInput(action, selectedNumber);
