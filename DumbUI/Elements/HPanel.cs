@@ -58,6 +58,20 @@ namespace DumbUI.Elements
                         }
                     }
                     break;
+                case (InputActions.Up):
+                    if(GetTop() != null)
+                    {
+                        selectedPanel = GetTop();
+                        selected = 0;
+                    }
+                    break;
+                case (InputActions.Down):
+                    if(GetBottom() != null)
+                    {
+                        selectedPanel = GetBottom();
+                        selected = 0;
+                    }
+                    break;
             }
         }
 
