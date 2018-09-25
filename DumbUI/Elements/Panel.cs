@@ -25,7 +25,7 @@ namespace DumbUI.Elements
 
         public abstract void AddElement(Element elem);
         internal abstract void UpdatePositions(Vector2 screenSize, bool offset);
-        internal abstract void MoveCursor(InputActions action, ref int selected, ref Panel outPanel);
+        internal abstract void MoveCursor(InputActions action, ref int selected, ref Panel selectedPanel);
 
         internal void Draw(SpriteBatch spriteBatch)
         {

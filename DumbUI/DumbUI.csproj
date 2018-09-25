@@ -48,6 +48,7 @@
     <Compile Include="Elements\Label.cs" />
     <Compile Include="Elements\HPanel.cs" />
     <Compile Include="Elements\Panel.cs" />
+    <Compile Include="Elements\VPanel.cs" />
     <Compile Include="InputEvents.cs" />
     <Compile Include="PlayerUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -35,12 +35,9 @@ namespace DumbUI.Elements
                         if(GetLeft() != null)
                         {
                             selectedPanel = GetLeft();
-                            selected = selectedPanel.GetElementCount() - 1;
                         }
-                        else
-                        {
-                            selected = selectedPanel.GetElementCount() - 1;
-                        }
+
+                        selected = selectedPanel.GetElementCount() - 1;
                     }
                     break;
                 case (InputActions.Right):
@@ -50,12 +47,9 @@ namespace DumbUI.Elements
                         if(GetRight() != null)
                         {
                             selectedPanel = GetRight();
-                            selected = 0;
                         }
-                        else
-                        {
-                            selected = 0;
-                        }
+
+                        selected = 0;
                     }
                     break;
                 case (InputActions.Up):
