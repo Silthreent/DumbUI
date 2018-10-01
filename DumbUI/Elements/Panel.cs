@@ -5,26 +5,36 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DumbUI.Elements
 {
+    /// <summary>
+    /// Basic Panel object that all Panels extend from.
+    /// </summary>
     public abstract class Panel
     {
         public Vector2 Position{ get; set; }
         protected Vector2 Size { get; set; }
 
-        public event UIEventHandler UIAcceptEvent;
         public delegate void UIEventHandler(Panel panel, int selected);
+        public event UIEventHandler UIAcceptEvent;
 
         protected List<Element> elements = new List<Element>();
         protected int elementsMargin;
 
         float topAnchor;
         float leftAnchor;
+
+        // Which Panels are connected to which sides
         Panel leftSide;
         Panel rightSide;
         Panel topSide;
         Panel bottomSide;
 
+        // Used to add the Element to it's list, usually moving other Elements to fit
         public abstract void AddElement(Element elem);
+
+        // Lets the Panel re-set up it's Elements based off screen size changes or anything else
         internal abstract void UpdatePositions(Vector2 screenSize, bool offset);
+
+        // Moves the cursor, being smart about switching between Panels based on it's type
         internal abstract void MoveCursor(InputActions action, ref int selected, ref Panel selectedPanel);
 
         internal void Draw(SpriteBatch spriteBatch)
@@ -35,6 +45,7 @@ namespace DumbUI.Elements
             }
         }
 
+        // Sends a basic event from input
         internal void CheckInput(InputActions action, int selected)
         {
             if(action == InputActions.Accept)
@@ -53,6 +64,8 @@ namespace DumbUI.Elements
             return elements.Count;
         }
 
+        // All the methods used to connect Panels together
+        // If the Top of Panel 1 is being connected to Panel 2, it will connect the Bottom of Panel 2 to Panel 1, etc
         #region Attachment Setting
         public void SetLeft(Panel panel)
         {
@@ -119,6 +132,7 @@ namespace DumbUI.Elements
         }
         #endregion
 
+        // Methods for setting the anchors, binds them between 0 and 1
         public float TopAnchor
         {
             get

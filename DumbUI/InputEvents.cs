@@ -11,12 +11,14 @@ namespace DumbUI
         KeyboardState keyboard;
         KeyboardState lastKeyboard;
 
+        // List containing every player's possible Keys and their actions
         Dictionary<InputActions, Keys>[] playerKeys;
 
         public InputEvents()
         {
             InputKeyEvent += DumbUIManager.OnInputEvent;
 
+            // Set up the players with their actions + key bindings combinations
             playerKeys = new Dictionary<InputActions, Keys>[2]
             {
                 new Dictionary<InputActions, Keys>()
@@ -46,6 +48,7 @@ namespace DumbUI
             CheckKeys();
         }
 
+        // Go through every player's keys and check if any were hit
         void CheckKeys()
         {
             for(int c = 0; c <= playerKeys.Length - 1; c++)
@@ -61,6 +64,7 @@ namespace DumbUI
         }
     }
 
+    // Possible actions keys can be assigned to
     enum InputActions
     {
         Left,

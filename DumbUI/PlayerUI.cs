@@ -8,7 +8,7 @@ namespace DumbUI
 {
     class PlayerUI
     {
-        public List<Panel> Elements { get; private set; }
+        public List<Panel> Panels { get; private set; }
 
         Panel selectedPanel;
         int selectedNumber;
@@ -17,11 +17,12 @@ namespace DumbUI
 
         public PlayerUI(Texture2D cursor)
         {
-            Elements = new List<Panel>();
+            Panels = new List<Panel>();
 
             cursorTex = cursor;
         }
 
+        // Chooses which Panel to set as selected
         internal void SelectPanel(Panel panel)
         {
             selectedPanel = panel;
@@ -29,13 +30,15 @@ namespace DumbUI
             //selectedElement = selectedPanel.GetElement(0);
         }
 
+        // Draw all Panels this player is holding and the cursor
         internal void Draw(SpriteBatch spriteBatch)
         {
-            foreach(Panel x in Elements)
+            foreach(Panel x in Panels)
             {
                 x.Draw(spriteBatch);
             }
 
+            // Draws the cursor if anything is selected
             if(selectedPanel != null)
             {
                 var ele = selectedPanel.GetElement(selectedNumber);
@@ -47,8 +50,10 @@ namespace DumbUI
             }
         }
 
+        // Tell all Panels to update their and their element's positions
         internal void UpdatePositions(Vector2 screenSize, bool vOffset, bool hSplit)
         {
+            // If in split screen mode, need to cut it's screen region in half
             if(hSplit)
             {
                 screenSize.Y /= 2;
@@ -56,16 +61,18 @@ namespace DumbUI
 
             Console.WriteLine(vOffset + ": " + screenSize);
 
-            foreach(Panel x in Elements)
+            foreach(Panel x in Panels)
             {
                 x.UpdatePositions(screenSize, vOffset);
             }
         }
 
+        // On receiving input, send it properly to the correct Panel
         internal void OnInputReceived(InputActions action)
         {
             switch(action)
             {
+                // If it was any movement direction, move the cursor
                 case InputActions.Left:
                     selectedPanel.MoveCursor(action, ref selectedNumber, ref selectedPanel);
                     break;
@@ -79,6 +86,7 @@ namespace DumbUI
                     selectedPanel.MoveCursor(action, ref selectedNumber, ref selectedPanel);
                     break;
 
+                // Otherwise, just let the Panel handle it themself
                 default:
                     selectedPanel.CheckInput(action, selectedNumber);
                     break;

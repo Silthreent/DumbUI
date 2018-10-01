@@ -3,6 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DumbUI.Elements
 {
+    /// <summary>
+    /// Basic texture image Element.
+    /// </summary>
     public class TextureRect : Element
     {
         Texture2D texture;
@@ -19,11 +22,6 @@ namespace DumbUI.Elements
             spriteBatch.Draw(texture, new Rectangle(Position.ToPoint(), size), Color.White);
         }
 
-        internal override Vector2 GetSize()
-        {
-            return new Vector2(size.X, size.Y);
-        }
-
         public void SetTexture(Texture2D texture)
         {
             this.texture = texture;
@@ -32,6 +30,11 @@ namespace DumbUI.Elements
         public void SetSize(int width, int height)
         {
             size = new Point(width, height);
+        }
+
+        internal override Vector2 GetSize()
+        {
+            return new Vector2(size.X, size.Y);
         }
     }
 }

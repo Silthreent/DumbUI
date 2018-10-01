@@ -2,6 +2,9 @@
 
 namespace DumbUI.Elements
 {
+    /// <summary>
+    /// Horizontal Panel. Arranges it's Elements in a row, centered.
+    /// </summary>
     public class HPanel : Panel
     {
         public HPanel(int margin = 10)
@@ -9,6 +12,7 @@ namespace DumbUI.Elements
             elementsMargin = margin;
         }
 
+        // Adds the Element to it's list, and updates everything's positioning
         public override void AddElement(Element elem)
         {
             elem.Position = new Vector2(Position.X + Size.X + elementsMargin, Position.Y);
@@ -17,17 +21,21 @@ namespace DumbUI.Elements
             var eSize = elem.GetSize();
             if(elements.Count == 1)
             {
+                // If this is the first Element, it must be the total size
                 Size = eSize;
                 return;
             }
 
+            // Add the Element X + margin, and see if it's taller than any current Elements
             Size = new Vector2(Size.X + elementsMargin + eSize.X, (eSize.Y > Size.Y ? eSize.Y : Size.Y));
         }
 
         internal override void MoveCursor(InputActions action, ref int selected, ref Panel selectedPanel)
         {
+            // TODO: Adding better logic for switching Panels so it doesn't visually go from the middle of the Panel to the begin/end
             switch(action)
             {
+                // If the cursor is moving sideways, move it and then check if it's past the end to switch Panels
                 case (InputActions.Left):
                     selected--;
                     if(selected < 0)
@@ -52,6 +60,8 @@ namespace DumbUI.Elements
                         selected = 0;
                     }
                     break;
+
+                // If it's trying to move up/down, just try to switch Panels
                 case (InputActions.Up):
                     if(GetTop() != null)
                     {

@@ -3,6 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DumbUI.Elements
 {
+    /// <summary>
+    /// Basic text Element
+    /// </summary>
     public class Label : Element
     {
         SpriteFont font;
