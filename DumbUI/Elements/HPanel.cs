@@ -69,6 +69,7 @@ namespace DumbUI.Elements
             }
         }
 
+        // TODO: Add what VPanel has and don't let it go out of it's screen region
         internal override void UpdatePositions(Vector2 screenSize, bool offset)
         {
             Position = new Vector2((screenSize.X * LeftAnchor) - (Size.X * .5f), screenSize.Y * TopAnchor + (offset ? screenSize.Y : 0));
