@@ -98,6 +98,17 @@ namespace DumbUI
                 players[player].SelectPanel(panel);
         }
 
+        public static void RemovelPanel(int player, Panel panel)
+        {
+            if(player >= players.Length)
+                return;
+
+            if(players[player] == null)
+                return;
+
+            players[player].RemovePanel(panel);
+        }
+
         // Removes the player's UI and then updates all positions
         public static void RemovePlayer(int player)
         {

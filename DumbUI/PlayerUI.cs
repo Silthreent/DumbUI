@@ -30,6 +30,14 @@ namespace DumbUI
             //selectedElement = selectedPanel.GetElement(0);
         }
 
+        internal void RemovePanel(Panel panel)
+        {
+            if(Panels.Contains(panel))
+            {
+                Panels.Remove(panel);
+            }
+        }
+
         // Draw all Panels this player is holding and the cursor
         internal void Draw(SpriteBatch spriteBatch)
         {
