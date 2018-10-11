@@ -68,6 +68,11 @@ namespace DumbUI.Elements
             return elements.Count;
         }
 
+        internal void ClearEvents()
+        {
+            UIAcceptEvent = null;
+        }
+
         // All the methods used to connect Panels together
         // If the Top of Panel 1 is being connected to Panel 2, it will connect the Bottom of Panel 2 to Panel 1, etc
         #region Attachment Setting

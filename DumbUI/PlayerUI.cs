@@ -67,6 +67,14 @@ namespace DumbUI
             }
         }
 
+        internal void UnsubEvents()
+        {
+            foreach(Panel p in Panels)
+            {
+                p.ClearEvents();
+            }
+        }
+
         // On receiving input, send it properly to the correct Panel
         internal void OnInputReceived(InputActions action)
         {
