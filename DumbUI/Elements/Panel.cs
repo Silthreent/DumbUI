@@ -10,7 +10,8 @@ namespace DumbUI.Elements
     /// </summary>
     public abstract class Panel
     {
-        public Vector2 Position{ get; set; }
+        public bool Visible { get; set; } = true;
+        internal Vector2 Position{ get; set; }
         protected Vector2 Size { get; set; }
 
         public delegate void UIEventHandler(Panel panel, int selected);
@@ -39,6 +40,9 @@ namespace DumbUI.Elements
 
         internal void Draw(SpriteBatch spriteBatch)
         {
+            if(!Visible)
+                return;
+
             foreach(Element e in elements)
             {
                 e.Draw(spriteBatch);

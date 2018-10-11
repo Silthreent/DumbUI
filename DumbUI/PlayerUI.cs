@@ -8,7 +8,7 @@ namespace DumbUI
 {
     class PlayerUI
     {
-        public List<Panel> Panels { get; private set; }
+        internal List<Panel> Panels { get; private set; }
 
         Panel selectedPanel;
         int selectedNumber;
