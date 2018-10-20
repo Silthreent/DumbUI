@@ -33,7 +33,7 @@ namespace DumbUI.Elements
         public abstract void AddElement(Element elem);
 
         // Lets the Panel re-set up it's Elements based off screen size changes or anything else
-        internal abstract void UpdatePositions(Vector2 screenSize, bool offset);
+        internal abstract void UpdatePositions(Viewport screenBounds);
 
         // Moves the cursor, being smart about switching between Panels based on it's type
         internal abstract void MoveCursor(InputActions action, ref int selected, ref Panel selectedPanel);

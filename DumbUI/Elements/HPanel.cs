@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace DumbUI.Elements
 {
@@ -80,9 +82,10 @@ namespace DumbUI.Elements
         }
 
         // TODO: Add what VPanel has and don't let it go out of it's screen region
-        internal override void UpdatePositions(Vector2 screenSize, bool offset)
+        internal override void UpdatePositions(Viewport screenBounds)
         {
-            Position = new Vector2((screenSize.X * LeftAnchor) - (Size.X * .5f), screenSize.Y * TopAnchor + (offset ? screenSize.Y : 0));
+            Console.WriteLine(screenBounds.X);
+            Position = new Vector2((screenBounds.Width * LeftAnchor) - (Size.X * .5f), screenBounds.Height * TopAnchor);
 
             float space = 0;
             foreach(Element e in elements)

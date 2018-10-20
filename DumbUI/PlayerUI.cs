@@ -59,19 +59,13 @@ namespace DumbUI
         }
 
         // Tell all Panels to update their and their element's positions
-        internal void UpdatePositions(Vector2 screenSize, bool vOffset, bool hSplit)
+        internal void UpdatePositions(Viewport screenBounds)
         {
-            // If in split screen mode, need to cut it's screen region in half
-            if(hSplit)
-            {
-                screenSize.Y /= 2;
-            }
-
-            Console.WriteLine(vOffset + ": " + screenSize);
+            Console.WriteLine(screenBounds.Bounds);
 
             foreach(Panel x in Panels)
             {
-                x.UpdatePositions(screenSize, vOffset);
+                x.UpdatePositions(screenBounds);
             }
         }
 

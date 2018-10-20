@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace DumbUI.Elements
 {
@@ -85,10 +86,10 @@ namespace DumbUI.Elements
         }
 
         // TODO: Don't let it go off screen in more directions than just the bottom
-        internal override void UpdatePositions(Vector2 screenSize, bool offset)
+        internal override void UpdatePositions(Viewport screenBounds)
         {
             // Get the position of the Panel itself to base everything else off of
-            Position = new Vector2((screenSize.X * LeftAnchor) - (Size.X * .5f), screenSize.Y * TopAnchor + (offset ? screenSize.Y : 0));
+            Position = new Vector2((screenBounds.Width * LeftAnchor) - (Size.X * .5f), screenBounds.Height * TopAnchor);
 
             // Amount to move the next Element in the cycle by
             float space = 0;
@@ -99,10 +100,10 @@ namespace DumbUI.Elements
                 e.Position = new Vector2(Position.X - (e.GetSize().X / 2), Position.Y + space);
                 
                 // Check if the Panel Elements went off screen on the bottom
-                if(e.Position.Y + (e.GetSize().Y) > screenSize.Y + (offset ? screenSize.Y : 0))
+                if(e.Position.Y + (e.GetSize().Y) > screenBounds.Y)
                 {
                     // If they did, hold how much it's off screen by so we can move it back after
-                    offscreen = (e.Position.Y + (e.GetSize().Y)) - (screenSize.Y + (offset ? screenSize.Y : 0));
+                    offscreen = (e.Position.Y + (e.GetSize().Y)) - screenBounds.Y;
                 }
 
                 space += e.GetSize().Y + elementsMargin;
