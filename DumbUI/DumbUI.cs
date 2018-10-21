@@ -26,7 +26,7 @@ namespace DumbUI
         /// <param name="content">The ContentManager to load the files from.</param>
         public static void LoadDesign(ContentManager content)
         {
-            cursorTex = content.Load<Texture2D>("Debug");
+            cursorTex = content.Load<Texture2D>("UI/Cursor");
         }
 
         /// <summary>
