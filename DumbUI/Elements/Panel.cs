@@ -171,7 +171,17 @@ namespace DumbUI.Elements
 
         float LockValue(float value)
         {
-            return Math.Min(Math.Max(value, 0), 1);
+            if(value > 100)
+            {
+                value = 100;
+            }
+            if(value < 0)
+            {
+                value = 0;
+            }
+
+            //return Math.Min(Math.Max(value, 0), 1);
+            return value / 100;
         }
     }
 }
