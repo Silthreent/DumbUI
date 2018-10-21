@@ -11,7 +11,10 @@ namespace DumbUI.Elements
     public abstract class Panel
     {
         public bool Visible { get; set; } = true;
+
         internal Vector2 Position{ get; set; }
+        internal string Tag { get; set; } = "Default";
+
         protected Vector2 Size { get; set; }
 
         public delegate void UIEventHandler(Panel panel, int selected);

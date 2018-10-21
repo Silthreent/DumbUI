@@ -74,7 +74,7 @@ namespace DumbUI
         /// <param name="player">Which player to assign the Panel to, 0 based.</param>
         /// <param name="panel">The Panel to assign.</param>
         /// <param name="select">Should the Panel select itself after assignment.</param>
-        public static void AddPanel(int player, Panel panel, bool select = false)
+        public static void AddPanel(int player, Panel panel, string tag, bool select = false)
         {
             if(player >= players.Length)
                 return;
@@ -87,6 +87,7 @@ namespace DumbUI
                 created = true;
             }
 
+            panel.Tag = tag;
             players[player].Panels.Add(panel);
 
             if(created)
@@ -105,6 +106,12 @@ namespace DumbUI
                 return;
 
             players[player].RemovePanel(panel);
+        }
+
+        // TODO: Some sort of null protection?
+        public static Panel GetPanel(int player, string tag)
+        {
+            return players[player].Panels.Find(x => x.Tag == tag);
         }
 
         // Removes the player's UI and then updates all positions
