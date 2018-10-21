@@ -122,6 +122,7 @@ namespace DumbUI
         static void UpdatePositions()
         {
             var pList = players.ToList();
+            pList.RemoveAll(x => x == null);
 
             if(pList.Count >= 2)
             {
